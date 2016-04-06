@@ -1,15 +1,31 @@
 {
-  "name": "express-es6",
+  "name": "express-rest-api-starter",
   "version": "1.0.0",
-  "description": "Express ES6 Starter",
+  "description": "Express Rest API Starter",
   "scripts": {
     "start": "parallelshell 'npm run browser' 'npm run server'",
     "browser": "browser-sync start --config 'bs-config.js'",
     "server": "nodemon --exec npm run babel-node -- ./backend/server.js localhost 3000",
     "babel-node": "babel-node",
-    "test": "mocha --compilers js:babel/register --reporter min -t 500 --watch --recursive || true"
+    "lint": "eslint --quiet './' && echo 'Completed:' && date || true && echo 'Completed:' && date",
+    "lint:watch": "watch 'npm run lint' ./",
+    "tape": "babel-node test-runner.js | tap-min  && date || true",
+    "tape:spec": "babel-node test-runner.js | tap-difflet || true && date",
+    "test": "npm run tape",
+    "test:spec": "npm run tape:spec",
+    "test:watch": "watch 'npm run tape' ."
   },
   "author": "Otis Virginie",
+  "keywords": [
+    "rest",
+    "node",
+    "express",
+    "api",
+    "mongodb",
+    "jwt",
+    "json web token",
+    "es6"
+  ],
   "license": "MIT",
   "dependencies": {
     "babel-cli": "~6.6.5",
@@ -24,28 +40,25 @@
     "express-logger": "0.0.3",
     "express-session": "~1.13.0",
     "helmet": "~1.3.0",
+    "jsonwebtoken": "~5.7.0",
     "method-override": "~2.3.5",
     "mongoose": "~4.4.11",
-    "mongoose-session": "0.0.4",
-    "nodemon": "~1.9.1",
-    "passport": "~0.3.2",
-    "passport-local": "~1.0.0",
-    "swig": "~1.4.2"
+    "nodemon": "~1.9.1"
   },
   "devDependencies": {
     "babel-eslint": "~6.0.2",
     "browser-sync": "~2.11.2",
     "bson-objectid": "~1.1.4",
-    "chai": "~3.5.0",
     "eslint": "~2.6.0",
+    "eslint-config-standard": "~5.1.0",
+    "eslint-plugin-promise": "~1.1.0",
+    "eslint-plugin-standard": "~1.3.2",
     "faker": "~3.1.0",
     "flightplan": "~0.6.13",
-    "mocha": "~2.4.5",
     "mongodb": "~2.1.14",
     "morgan": "~1.7.0",
     "parallelshell": "~2.0.0",
-    "sinon": "~1.17.3",
-    "sinon-chai": "~2.8.0",
-    "supertest": "~1.2.0"
+    "supertest": "~1.2.0",
+    "tap-min": "^1.1.0"
   }
 }

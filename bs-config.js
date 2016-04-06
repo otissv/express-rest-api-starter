@@ -9,7 +9,7 @@ module.exports = {
   //   index: 'index.html'
   // },
   port: 9000,
-  proxy: 'http://localhost:3000',
+  proxy: 'http://localhost:8000',
   startPath: null,
   ghostMode: {
     clicks: true,

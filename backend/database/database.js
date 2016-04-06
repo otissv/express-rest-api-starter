@@ -7,7 +7,7 @@
 import mongoose from 'mongoose';
 
 
-let database = {
+export default {
   connection: (db) => {
     // Create the database connection
     mongoose.connect(db.uri, db.opts);
@@ -35,5 +35,3 @@ let database = {
     return mongoose;
   }
 };
-
-export default database;

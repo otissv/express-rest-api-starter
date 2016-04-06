@@ -6,7 +6,7 @@
 
 import mongoose from 'mongoose';
 
-var Comments = new mongoose.Schema({
+const Comments = new mongoose.Schema({
   comment   : String,
   commenter : String,
   created   : Date,
@@ -14,7 +14,7 @@ var Comments = new mongoose.Schema({
 });
 
 
-let articleSchema = new mongoose.Schema({
+const articleSchema = new mongoose.Schema({
   title: {
     type: String,
     required: ' please complete title'

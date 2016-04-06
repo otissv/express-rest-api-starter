@@ -4,9 +4,46 @@
 
 'use strict';
 
-import User from '../models/users-model.js';
+import User from '../models/users-model-v01';
 
-let userController = {
+
+const userClened = (user) => {
+  return Object.assign({}, {
+    email: user.email,
+    _id: user.id,
+    lastLogin: user.lastLogin,
+    roles: user.roles,
+    username: user.username
+  });
+}
+
+
+export default {
+
+  findAll (req, res) {
+
+    // check header or url parameters or post parameters for token
+    User.find({}, (err, users) => {
+      if (err) {
+        return res.status(400).send({
+          message: 'No users were found'
+        });
+      }
+
+      if (users != null) {
+        const userList = users.map(user => userClened(user));
+
+        return res.json(userList);
+
+      } else {
+        return res.status(404).send({
+          message: 'error'
+        });
+      }
+    });
+  },
+
+
   find (req, res) {
     const id = req.params.user;
 
@@ -17,8 +54,9 @@ let userController = {
         });
       }
 
-      if (typeof user !== 'undefined' && user !== null) {
-        return res.send(user);
+      if (user != null) {
+        return res.json(userClened(user));
+
       } else {
         return res.status(404).send({
           message: 'error'
@@ -72,5 +110,3 @@ let userController = {
   }
 
 };
-
-export default userController;

@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 
 
-let userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   firstName  : String,
   lastName   : String,
   displayName: String,

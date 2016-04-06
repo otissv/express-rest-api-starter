@@ -1,10 +1,14 @@
+/*
+* Application enviorments config
+*/ 
+
 'use strict';
 
 import development from './development-env.js';
 import production from './production-env.js';
 
 
-var env = (app) => {
+export default function env (app) {
   var config;
 
   switch (app.get('env')) {
@@ -29,6 +33,3 @@ var env = (app) => {
   app.locals.db = config.db;
   app.locals.session = config.session;
 };
-
-
-export default env;

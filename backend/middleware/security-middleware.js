@@ -8,13 +8,13 @@ import csrf from 'csurf';
 import helmet from 'helmet';
 
 
-let security = (app) => {
+export default function security (app) {
 
   app.disable('x-powered-by');
   app.use(csrf());
 
   app.use( (req, res, next) => {
-    let token = req.csrfToken();
+    const token = req.csrfToken();
 
     res.cookie('XSRF-TOKEN', token);
     next();

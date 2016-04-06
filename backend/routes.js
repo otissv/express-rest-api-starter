@@ -4,34 +4,12 @@
 
 'use strict';
 
-import core from './controllers/core-controller.js';
-import auth from './controllers/auth-controller.js';
-import user from './controllers/user-controller.js';
+
+import routesV01 from './api/v01/routes-v01';
 
 
-let routes = (app) => {
-  // Authentication routes
-  app.route('/signup')
-   .get(auth.signUp)
-   .post(auth.processSignUp);
+export default function routes (app) {
+  const route =  app.route;
 
-  app.route('/signin')
-    .get(auth.signIn)
-    .post(auth.processSignIn);
-
-  app.route('/signout')
-    .get(auth.signOut);
-
-  // Core routes
-  app.route('/users/:user')
-    .get(user.find)
-    .put(user.update)
-    .delete(user.remove);
-
-  // Core routes
-  app.route('/').get(core.index);
-  app.use(core.error404);
-  app.use(core.error505);
-};
-
-export default routes;
+  routesV01(app);
+}

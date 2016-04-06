@@ -5,7 +5,7 @@
 'use strict';
 
 
-let logger = (app) => {
+export default function logger (app) {
   switch (app.get('env')) {
   case 'development':
     app.use(require('morgan')('dev'));
@@ -17,6 +17,3 @@ let logger = (app) => {
     break;
   }
 };
-
-
-export default logger;

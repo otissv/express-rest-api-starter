@@ -1,9 +1,12 @@
+/*
+* Production enviorment*/
+
 'use strict';
 
 import all from './all-env.js';
 
 
-let production = {
+export default {
   port   : all.port,
   baseURL: 'http://www.yourwebsite.com',
   title  : all.title,
@@ -14,4 +17,3 @@ let production = {
   session: all.session
 };
 
-export default production;
