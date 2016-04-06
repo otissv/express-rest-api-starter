@@ -5,13 +5,12 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt-nodejs';
+
 
 
 const userSchema = new mongoose.Schema({
   firstName  : String,
   lastName   : String,
-  displayName: String,
   username: {
     type    : String,
     unique  : true,
@@ -28,12 +27,6 @@ const userSchema = new mongoose.Schema({
     type    : String,
     required: 'Please fill in password'
   },
-  provider: {
-    type   : String,
-    default: 'local'
-  },
-  providerData: {},
-  additionalProvidersData: {},
   roles: {
     type: [{
       type: String,
@@ -45,18 +38,6 @@ const userSchema = new mongoose.Schema({
   created  : { type: Date},
   updated  : { type: Date, default: Date.now }
 });
-
-
-/*
-/* Methods
-*/
-userSchema.methods.generateHash = function generateHash (password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-
-userSchema.methods.validPassword = function validPassword (password) {
-  return bcrypt.compareSync(password, this.password);
-};
 
 
 export default mongoose.model('User', userSchema);

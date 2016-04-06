@@ -15,6 +15,9 @@ export default function routesV01 (app) {
   /*
   * Authentication routes
   */
+  app.route('/api/v01/register')
+   .post(auth.register);
+
   app.route('/api/v01/authenticate')
    .post(auth.authenticate);
 

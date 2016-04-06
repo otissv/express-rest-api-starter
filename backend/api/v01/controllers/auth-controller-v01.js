@@ -6,17 +6,45 @@
 'use strict';
 
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt-nodejs';
+import { generateHash, validPassword } from '../../../helpers/bycrypt-helper';
 import User from '../models/users-model-v01';
 import secret from '../../../../secret';
-
+import bcrypt from 'bcrypt-nodejs';
 
 export default {
+  register (req, res) {
+    // create a sample user
+    const user = new User({
+      username: req.body.username,
+      password: generateHash(req.body.password)
+    });
+
+    user.save(function (err) {
+      if (err) {
+        return res.json({ 
+          success: false,
+          message: err.errmsg
+        });
+      }
+
+      res.json({ 
+        success: true,
+        meassage: 'Saved user',
+        result: {
+          username: user.username,
+          roles: user.roles,
+          token: jwt.sign(user, secret)
+        }
+      });
+    });
+  }, 
+
+
   authenticate (req, res) {
     User.findOne({
       username: req.body.username
     }, function(err, user) {
-      console.log(req.body.username)
+
       if (err) throw err;
 
       if (!user) {
@@ -24,15 +52,20 @@ export default {
       
       } else if (user) {
 
-        // check if password matches
-        if (!bcrypt.compareSync(req.body.password, user.password)) {
+        // Check if password matches
+        if (!validPassword(user, req.body.password)) {
           res.json({ success: false, message: 'Authentication failed. Either the username or password was incorrect.' });
         } else {
 
-          //if user is found and password is right create a token
-          var token = jwt.sign(user, secret);
+          // If user is found and password is right create a token
+          let token;
+          
+          if (!req.body.token) {
+            token = jwt.sign(user, secret);
+          }
+          
 
-          // return the information including token as JSON
+          // Return the information including token as JSON
           res.json({
             success: true,
             message: 'User has been authenticated!',
@@ -48,19 +81,19 @@ export default {
 
   authorised (req, res, next) {
 
-    // check header or url parameters or post parameters for token
+    // Check header or url parameters or post parameters for token
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-    // decode token
+    // Decode token
     if (token) {
 
-      // verifies secret and checks exp
+      // Verifies secret and checks exp
       jwt.verify(token, secret, function(err, decoded) {      
         if (err) {
           return res.json({ success: false, message: 'Failed to authenticate token.' }); 
 
         } else {
-          // if everything is good, save to request for use in other routes
+          // If everything is good, save to request for use in other routes
           req.decoded = decoded;    
           next();
         }
@@ -68,7 +101,7 @@ export default {
 
     } else {
 
-      // if there is no token return an error
+      // If there is no token return an error
       return res.status(403).send({ 
           success: false, 
           message: 'No token provided.' 
