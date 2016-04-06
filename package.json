@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Express Rest API Starter",
   "scripts": {
-    "start": "parallelshell 'npm run browser' 'npm run server'",
-    "browser": "browser-sync start --config 'bs-config.js'",
-    "server": "nodemon --exec npm run babel-node -- ./backend/server.js localhost 3000",
+    "start": "nodemon --exec npm run babel-node -- ./backend/server.js localhost 3000",
     "babel-node": "babel-node",
     "lint": "eslint --quiet './' && echo 'Completed:' && date || true && echo 'Completed:' && date",
     "lint:watch": "watch 'npm run lint' ./",
@@ -47,7 +45,6 @@
   },
   "devDependencies": {
     "babel-eslint": "~6.0.2",
-    "browser-sync": "~2.11.2",
     "bson-objectid": "~1.1.4",
     "eslint": "~2.6.0",
     "eslint-config-standard": "~5.1.0",
@@ -57,8 +54,6 @@
     "flightplan": "~0.6.13",
     "mongodb": "~2.1.14",
     "morgan": "~1.7.0",
-    "parallelshell": "~2.0.0",
-    "supertest": "~1.2.0",
     "tap-min": "^1.1.0"
   }
 }
