@@ -9,14 +9,14 @@ import redis from 'redis';
 let client;
 
 export default {
-  connection: (opts) => {
+  connection: (options) => {
 
     // Create the database connection
-    client = redis.createClient(opts.port, opts.host);
+    client = redis.createClient(options.port, options.host);
 
     // Event handlers
     client.on('connect', () => {
-      console.log(`Redis connected to ${opts.uri}:${opts.port}`);
+      console.log(`Redis connected to ${options.host}:${options.port}`);
     });
 
   },
