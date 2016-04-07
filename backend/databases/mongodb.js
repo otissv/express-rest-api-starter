@@ -10,11 +10,14 @@ import mongoose from 'mongoose';
 export default {
   connection: (options) => {
     // Create the database connection
-    mongoose.connect(options.uri, options.opts);
+
+    const { uri, opts } = options;
+
+    mongoose.connect(uri, opts);
 
     // Event handlers
     mongoose.connection.on('connected', () => {
-      console.log('Mongoose connected to ' + options.uri);
+      console.log('Mongoose connected to ' + uri);
     });
     mongoose.connection.on('error', (err) => {
       console.log('Mongoose connection error: ' + err);

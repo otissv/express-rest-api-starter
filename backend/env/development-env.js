@@ -11,6 +11,17 @@ export default {
   port   : all.port,
   baseURL: 'http://localhost:' + all.port,
   title  : all.title + ' Dev',
-  mongodb     : all.mongodb,
+  mongodb: {
+    uri: 'mongodb://127.0.0.1:27017/test',
+    opts: {
+      server: {
+        socketOptions: { keepAlive: 1 }
+      }
+    }
+  },
+  redis: {
+    uri: 'mongodb://127.0.0.1',
+    port: 6379
+  },
   session: all.session
 };

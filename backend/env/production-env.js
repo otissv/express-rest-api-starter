@@ -12,7 +12,11 @@ export default {
   title  : all.title,
   mongodb     : {
     uri  : 'path/to/database/location',
-    opts : all.mongodb.opts
+    opts: {
+      server: {
+        socketOptions: { keepAlive: 1 }
+      }
+    }
   },
   session: all.session
 };

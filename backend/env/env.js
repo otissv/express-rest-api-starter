@@ -27,9 +27,5 @@ export default function env (app) {
   *Application variables
   */
   app.set('baseURL', config.baseURL);
-  app.locals.port = config.port;
-  app.locals.title = config.title;
-  app.locals.description = config.description;
-  app.locals.mongodb = config.mongodb;
-  app.locals.session = config.session;
+  app.locals = Object.assign({}, app.locals, config);
 };
