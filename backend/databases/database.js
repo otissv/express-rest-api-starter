@@ -7,7 +7,7 @@
 import mongoose from 'mongoose';
 
 
-export default {
+export const mongoClient = {
   connection: (db) => {
     // Create the database connection
     mongoose.connect(db.uri, db.opts);
@@ -34,4 +34,4 @@ export default {
   instance: () => {
     return mongoose;
   }
-};
+}
