@@ -1,3 +1,7 @@
+/*
+* Password encryption helper mrthod
+*/
+
 'use strict';
 
 

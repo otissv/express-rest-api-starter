@@ -7,9 +7,11 @@
 
 import jwt from 'jsonwebtoken';
 import { generateHash, validPassword } from '../../../helpers/bycrypt-helper';
+import { generateToken, validToken } from '../../../helpers/token-helper';
 import User from '../models/users-model-v01';
 import secret from '../../../../secret';
 import bcrypt from 'bcrypt-nodejs';
+
 
 export default {
   register (req, res) {
@@ -19,6 +21,7 @@ export default {
       password: generateHash(req.body.password)
     });
 
+
     user.save(function (err) {
       if (err) {
         return res.json({ 
@@ -27,13 +30,16 @@ export default {
         });
       }
 
+      // Generate json web token
+      const token = generateToken(user, secret);
+
       res.json({ 
         success: true,
         meassage: 'Saved user',
         result: {
           username: user.username,
           roles: user.roles,
-          token: jwt.sign(user, secret)
+          token: token
         }
       });
     });
