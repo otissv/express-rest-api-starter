@@ -10,9 +10,9 @@ export default {
   port   : all.port,
   baseURL: 'http://www.yourwebsite.com',
   title  : all.title,
-  db     : {
+  mongodb     : {
     uri  : 'path/to/database/location',
-    opts : all.db.opts
+    opts : all.mongodb.opts
   },
   session: all.session
 };

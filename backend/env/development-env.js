@@ -11,6 +11,6 @@ export default {
   port   : all.port,
   baseURL: 'http://localhost:' + all.port,
   title  : all.title + ' Dev',
-  db     : all.db,
+  mongodb     : all.mongodb,
   session: all.session
 };

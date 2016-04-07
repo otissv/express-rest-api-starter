@@ -30,6 +30,6 @@ export default function env (app) {
   app.locals.port = config.port;
   app.locals.title = config.title;
   app.locals.description = config.description;
-  app.locals.db = config.db;
+  app.locals.mongodb = config.mongodb;
   app.locals.session = config.session;
 };

@@ -1,5 +1,5 @@
 /*
-* Database connection
+* MongoDB connection
 */
 
 'use strict';
@@ -7,14 +7,14 @@
 import mongoose from 'mongoose';
 
 
-export const mongoClient = {
-  connection: (db) => {
+export default {
+  connection: (options) => {
     // Create the database connection
-    mongoose.connect(db.uri, db.opts);
+    mongoose.connect(options.uri, options.opts);
 
     // Event handlers
     mongoose.connection.on('connected', () => {
-      console.log('Mongoose connected to ' + db.uri);
+      console.log('Mongoose connected to ' + options.uri);
     });
     mongoose.connection.on('error', (err) => {
       console.log('Mongoose connection error: ' + err);

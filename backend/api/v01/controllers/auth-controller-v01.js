@@ -57,11 +57,16 @@ export default {
           res.json({ success: false, message: 'Authentication failed. Either the username or password was incorrect.' });
         } else {
 
-          // If user is found and password is right create a token
-          let token;
           
+          let token;
+
           if (!req.body.token) {
+            // If user is found and password is right create a token
             token = jwt.sign(user, secret);
+          } else {
+
+            // Check token in store
+            token = 'token from store'
           }
           
 

@@ -1,7 +1,7 @@
 'use strict';
 
 import express from 'express';
-import { mongoClient } from '../backend/databases/database';
+import databases from '../backend/databases';
 import env from '../backend/env/env';
 import logger from '../backend/middleware/logger-middleware';
 import body from '../backend/middleware/body-middleware';
@@ -12,12 +12,14 @@ import routes from './routes';
 
 const app = express();
 
+const { mongodb } = databases;
+
 env(app);
-mongoClient.connection({ uri: app.locals.db.uri, opts: app.locals.db.opts });
+mongodb.connection({ uri: app.locals.mongodb.uri, opts: app.locals.mongodb.opts });
 logger(app);
 body(app);
 staticFiles(app, express);
-session(app, mongoClient.instance());
+session(app, mongodb.instance());
 // security(app);
 routes(app);
 
