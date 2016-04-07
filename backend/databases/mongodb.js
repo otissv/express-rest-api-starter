@@ -6,8 +6,8 @@
 
 import mongoose from 'mongoose';
 
-export function  connection (options) {
-  
+export function connection (options) {
+
   // Create the database connection
   const { uri, opts } = options;
 
@@ -32,7 +32,7 @@ export function  connection (options) {
   });
 };
 
-export function  instance () {
+export function instance () {
 
   // return instance of mongodb client
   return mongoose;

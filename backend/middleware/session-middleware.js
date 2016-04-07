@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser';
 const MongoStore = require('connect-mongo')(expressSession);
 
 
-export default function  session (app, mongoose) {
+export default function session (app, mongoose) {
   app.use(cookieParser());
   app.use(expressSession({
     secret: app.locals.session,
@@ -20,4 +20,3 @@ export default function  session (app, mongoose) {
     resave: true
   }));
 };
-

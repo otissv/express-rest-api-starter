@@ -10,7 +10,6 @@ import { generateHash, validPassword } from '../../../helpers/bycrypt-helper';
 import { generateToken, validToken } from '../../../helpers/token-helper';
 import User from '../models/users-model-v01';
 import secret from '../../../../secret';
-import bcrypt from 'bcrypt-nodejs';
 
 
 export default {
@@ -24,7 +23,7 @@ export default {
 
     user.save(function (err) {
       if (err) {
-        return res.json({ 
+        return res.json({
           success: false,
           message: err.errmsg
         });
@@ -33,7 +32,7 @@ export default {
       // Generate json web token
       const token = generateToken(user, secret);
 
-      res.json({ 
+      res.json({
         success: true,
         meassage: 'Saved user',
         result: {
@@ -43,19 +42,19 @@ export default {
         }
       });
     });
-  }, 
+  },
 
 
   authenticate (req, res) {
     User.findOne({
       username: req.body.username
-    }, function(err, user) {
+    }, function (err, user) {
 
       if (err) throw err;
 
       if (!user) {
         res.json({ success: false, message: 'Authentication failed. User not found.' });
-      
+
       } else if (user) {
 
         // Check if password matches
@@ -63,7 +62,7 @@ export default {
           res.json({ success: false, message: 'Authentication failed. Either the username or password was incorrect.' });
         } else {
 
-          
+
           let token;
 
           if (!req.body.token) {
@@ -72,9 +71,9 @@ export default {
           } else {
 
             // Check token in store
-            token = 'token from store'
+            token = 'token from store';
           }
-          
+
 
           // Return the information including token as JSON
           res.json({
@@ -82,7 +81,7 @@ export default {
             message: 'User has been authenticated!',
             token: token
           });
-        }   
+        }
 
       }
 
@@ -99,13 +98,13 @@ export default {
     if (token) {
 
       // Verifies secret and checks exp
-      jwt.verify(token, secret, function(err, decoded) {      
+      jwt.verify(token, secret, function (err, decoded) {
         if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' }); 
+          return res.json({ success: false, message: 'Failed to authenticate token.' });
 
         } else {
           // If everything is good, save to request for use in other routes
-          req.decoded = decoded;    
+          req.decoded = decoded;
           next();
         }
       });
@@ -113,10 +112,10 @@ export default {
     } else {
 
       // If there is no token return an error
-      return res.status(403).send({ 
-          success: false, 
-          message: 'No token provided.' 
+      return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
       });
     }
   }
-}
+};

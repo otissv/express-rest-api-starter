@@ -12,10 +12,8 @@ import routes from './routes';
 
 const app = express();
 
-const { mongodb } = databases;
-
 env(app);
-databases({ 
+databases({
   mongodb: app.locals.mongodb,
   redis: app.locals.redis
 });

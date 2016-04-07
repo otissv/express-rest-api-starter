@@ -15,7 +15,7 @@ const userClened = (user) => {
     roles: user.roles,
     username: user.username
   });
-}
+};
 
 
 export default {
@@ -91,7 +91,7 @@ export default {
   remove (req, res) {
     var id = req.params.user;
 
-    User.remove( id, (err, result) => {
+    User.remove(id, (err, result) => {
       if (err) {
         return res.status(400).send({
           message: 'User cannot be found'

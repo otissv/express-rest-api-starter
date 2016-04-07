@@ -24,5 +24,5 @@ export function generateToken (user, secret) {
 
 
 export function	validToken (id, token) {
-		const client =  redis.instance();
+  const client = redis.instance();
 };

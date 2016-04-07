@@ -13,7 +13,7 @@ export default function security (app) {
   app.disable('x-powered-by');
   app.use(csrf());
 
-  app.use( (req, res, next) => {
+  app.use((req, res, next) => {
     const token = req.csrfToken();
 
     res.cookie('XSRF-TOKEN', token);
@@ -23,11 +23,11 @@ export default function security (app) {
   // Content Security Policy
   if (app.get('env' !== 'development')) {
     app.use(helmet.csp({
-      defaultSrc: [''self''],
+      defaultSrc: ['self'],
       scriptSrc: ['*.google-analytics.com'],
-      styleSrc: [''unsafe-inline''],
+      styleSrc: ['unsafe-inline'],
       imgSrc: ['*.google-analytics.com'],
-      connectSrc: [''none''],
+      connectSrc: ['none'],
       fontSrc: [],
       objectSrc: [],
       mediaSrc: [],

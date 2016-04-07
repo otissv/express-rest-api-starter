@@ -7,7 +7,6 @@
 import mongoose from 'mongoose';
 
 
-
 const userSchema = new mongoose.Schema({
   firstName  : String,
   lastName   : String,
@@ -35,7 +34,7 @@ const userSchema = new mongoose.Schema({
     default: ['user']
   },
   lastLogin: { type: Date },
-  created  : { type: Date},
+  created  : { type: Date },
   updated  : { type: Date, default: Date.now }
 });
 

@@ -1,6 +1,6 @@
 /*
 * Application enviorments config
-*/ 
+*/
 
 'use strict';
 
