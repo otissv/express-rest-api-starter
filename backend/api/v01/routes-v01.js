@@ -15,11 +15,18 @@ export default function routesV01 (app) {
   /*
   * Authentication routes
   */
+  // unregister token
+  app.route('/api/v01/unauthenticate')
+    .post(auth.unauthenticate);
+
+  // register user
   app.route('/api/v01/register')
    .post(auth.register);
 
+  // authenticate user
   app.route('/api/v01/authenticate')
    .post(auth.authenticate);
+
 
   // Check have authorisation to access.
   app.use(auth.authorised);

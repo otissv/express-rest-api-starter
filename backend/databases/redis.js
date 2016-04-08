@@ -18,6 +18,12 @@ export function connection (options) {
     console.log(`Redis connected to ${options.host}:${options.port}`);
   });
 
+
+  client.on('end', () => {
+    console.log('Redis disconnected');
+    client.quit();
+  });
+
 };
 
 export function instance () {
