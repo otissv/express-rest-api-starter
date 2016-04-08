@@ -8,21 +8,18 @@ import mongoose from 'mongoose';
 
 
 const userSchema = new mongoose.Schema({
-  firstName  : String,
-  lastName   : String,
-  username: {
-    type    : String,
-    unique  : true,
-    required: 'Please fill in username',
-    trim: true
-  },
+  created   : { type: Date },
+  createdBy : String,
   email: {
     type: String
     // unique:true,
     // required: 'Please fill in your email'
     // match: [/.+\@.+\..+/, 'Please fill a valid email address']
   },
-  password: {
+  firstName : String,
+  lastName  : String,
+  lastLogin : { type: Date },
+  password  : {
     type    : String,
     required: 'Please fill in password'
   },
@@ -33,9 +30,15 @@ const userSchema = new mongoose.Schema({
     }],
     default: ['user']
   },
-  lastLogin: { type: Date },
-  created  : { type: Date },
-  updated  : { type: Date, default: Date.now }
+  telephone: Number,
+  updated : { type: Date, default: Date.now },
+  updatedBy : String,
+  username: {
+    type    : String,
+    unique  : true,
+    required: 'Please fill in username',
+    trim: true
+  }
 });
 
 
