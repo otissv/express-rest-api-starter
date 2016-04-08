@@ -5,7 +5,7 @@
 'use strict';
 
 import User from '../models/user-model-v01';
-
+import { deleteToken } from '../../../helpers/token-helper';
 
 const userClened = (user) => {
   return Object.assign({}, {
@@ -19,19 +19,17 @@ const userClened = (user) => {
 
 
 export default {
-
   findAll (req, res) {
-
     // check header or url parameters or post parameters for token
-    User.find({}, (err, users) => {
+    User.find({}, (err, user) => {
       if (err) {
         return res.status(400).json({
           message: 'Error retriving user'
         });
       }
 
-      if (users != null) {
-        const userList = users.map(user => userClened(user));
+      if (user != null) {
+        const userList = user.map(user => userClened(user));
 
         return res.json({
           success: true,
@@ -42,17 +40,16 @@ export default {
       } else {
         return res.status(404).json({
           sucess: false,
-          message: 'No users were found'
+          message: 'No user were found'
         });
       }
     });
   },
 
-
   find (req, res) {
-    const id = req.params.user;
+    const userId = req.params.user;
 
-    User.findById(id, (err, user) => {
+    User.findById(userId, (err, user) => {
       if (err) {
         return res.status(400).json({
           success: false,
@@ -76,12 +73,11 @@ export default {
     });
   },
 
-
   update (req, res) {
     const data = req.body;
-    const id = req.body.id;
+    const _id = req.params.user;
 
-    User.update(id, data, (err, result) => {
+    User.update({ _id }, data, (err, result) => {
       if (err) {
         return res.status(400).json({
           success: false,
@@ -97,7 +93,7 @@ export default {
       } else {
         return res.status(404).json({
           success: false,
-          message: 'User was not updatied'
+          message: 'User was not updated'
         });
       }
     });
@@ -105,9 +101,18 @@ export default {
 
 
   remove (req, res) {
-    var id = req.params.user;
+    var _id = req.query.user;
 
-    User.remove(id, (err, result) => {
+    if (!_id) {
+      return res.status(404).json({
+        success: false,
+        message: 'A user must be provided'
+      });
+    }
+
+    deleteToken(_id);
+
+    User.remove({_id: _id}, (err, result) => {
       if (err) {
         return res.status(400).json({
           success: false,
@@ -116,14 +121,14 @@ export default {
       }
 
       if (result.result.n === 1) {
-        return res.status(404).json({
-          success: false,
-          message: 'User was not removed'
-        });
-      } else {
         return res.json({
           success: true,
           message: 'User removed'
+        });
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: 'User was not removed'
         });
       }
 

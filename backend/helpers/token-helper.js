@@ -17,8 +17,9 @@ export function generateToken (user) {
   const token = jwt.sign(user, secret);
 
   // Save to token
-  redis().hset('tokens', user._id.toString(), token);
-
+  if (user._id) {
+    redis().hset('tokens', user._id.toString(), token);
+  }
   return token;
 };
 
@@ -26,13 +27,17 @@ export function generateToken (user) {
 export function	getToken (_id, cb) {
 
   // Get token
-  redis().hget('tokens', _id.toString(), (err, token) => {
-    if (err) {
-      cb && cb(err);
-    } else {
-      cb && cb(token);
-    }
-  });
+  if (!_id) {
+    cb && cb();
+  } else {
+    redis().hget('tokens', _id.toString(), (err, token) => {
+      if (err) {
+        cb && cb(err);
+      } else {
+        cb && cb(token);
+      }
+    });
+  }
 };
 
 
@@ -53,11 +58,16 @@ export function validateToken (_id, token, cb) {
 
 
 export function deleteToken (_id, cb) {
-  redis().del('tokens', _id.toString(), (err, reply) => {
-    if (err) {
-      cb && cb(err);
-    }
+  if (!_id) {
+    cb && cb(true);
+  } else {
 
-    cb && cb(null, reply);
-  });
+    redis().del('tokens', _id.toString(), (err, reply) => {
+      if (err) {
+        cb && cb(err);
+      }
+
+      cb && cb(null, reply);
+    });
+  }
 }
