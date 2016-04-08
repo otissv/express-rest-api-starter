@@ -32,6 +32,29 @@ $ npm install
 npm starter
 ```
 
+### Routes
+
+Registers a new user - signup.
+
+```
+http://localhost:8000/api/v01/register?username=janedoe&passoword=xyz
+```
+
+Authenticates a user - login.
+```
+http://localhost:8000/api/v01/authenticate
+```
+
+Unauthenticates a user - logout.
+```
+http://localhost:8000/api/v01/unauthenticate/?_id=57079035be52410d7ec21dc0
+```
+
+Access authorsied routes
+```
+http://localhost:8000/api/v01/users?token=genrated_token_return_from_register_or_authentica_route
+```
+
 ## Configuration
 
 Configuration settings can be found in ./backend/env of the project root directory.
