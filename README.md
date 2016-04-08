@@ -7,6 +7,7 @@ Includes:
 - [Node](https://nodejs.org/en/)
 - [Express](http://expressjs.com/)
 - [MongoDB](https://www.mongodb.org/)
+- [Redis](http://redis.io/)
 - [JSON Web Token](https://jwt.io/)
 - [Babel - ES6]( https://babeljs.io/)
 - [Tape](https://github.com/substack/tape)

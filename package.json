@@ -1,7 +1,7 @@
 {
   "name": "express-rest-api-starter",
   "version": "1.0.0",
-  "description": "Express Rest API Starter",
+  "description": "Express Rest API Starter with MongoDB, Redis and JSON Web Token",
   "scripts": {
     "start": "nodemon --exec npm run babel-node -- ./backend/server.js localhost 3000",
     "babel-node": "babel-node",
@@ -22,6 +22,7 @@
     "mongodb",
     "jwt",
     "json web token",
+    "redis",
     "es6"
   ],
   "license": "MIT",
