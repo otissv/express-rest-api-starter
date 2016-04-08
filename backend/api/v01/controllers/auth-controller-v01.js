@@ -111,7 +111,7 @@ export default {
       if (err) {
         return res.json({
           success: false,
-          message: user
+          message: err
         });
       }
 
