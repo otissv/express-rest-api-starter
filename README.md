@@ -50,9 +50,9 @@ Unauthenticates a user - logout.
 http://localhost:8000/api/v01/unauthenticate/?_id=57079035be52410d7ec21dc0
 ```
 
-Access authorsied routes
+Access authorised routes
 ```
-http://localhost:8000/api/v01/users?_id=57079035be52410d7ec21dc0&token=genrated_token_return_from_register_or_authentica_route
+http://localhost:8000/api/v01/users/:user?_id=logged_in_user&token=generated_token_from_server
 ```
 
 ## Configuration
