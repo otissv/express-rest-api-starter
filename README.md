@@ -1,16 +1,16 @@
 # Express Rest API Starter  
 
-Project starter for express api server. 
+Project starter for express api server.
 
-Includes: 
+Includes:
 
-- Node
-- Express
-- MongoDB
-- JSON Web Token
-- Babel - ES6
-- Rest
-- Tape
+- [Node](https://nodejs.org/en/)
+- [Express](http://expressjs.com/)
+- [MongoDB](https://www.mongodb.org/)
+- [JSON Web Token](https://jwt.io/)
+- [Babel - ES6]( https://babeljs.io/)
+- [Tape](https://github.com/substack/tape)
+- [Rest](https://en.wikipedia.org/wiki/Representational_state_transfer)
 
 ## Usage
 
@@ -43,6 +43,5 @@ Run test `npm tests`
 Watch tests `npm run tests:watch`  
 Run tests with spec `npm run test:spec`  
 
-## License 
+## License
 MIT
-
