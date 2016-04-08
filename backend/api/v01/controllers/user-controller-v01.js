@@ -101,7 +101,7 @@ export default {
 
 
   remove (req, res) {
-    var _id = req.query.user;
+    var _id = req.params.user;
 
     if (!_id) {
       return res.status(404).json({
