@@ -75,7 +75,7 @@ export default {
     const _id = req.body._id || req.query._id || req.headers['x-access-id'];
 
     function verifyToken (token) {
-      // Verifies secret and checks exp
+      // Verifies secret and checks expiery
       jwt.verify(token, secret, function (err, decoded) {
         if (err) {
           return res.json({ success: false, message: 'Failed to authenticate token.' });
