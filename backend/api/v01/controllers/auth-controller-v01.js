@@ -7,7 +7,7 @@
 
 import jwt from 'jsonwebtoken';
 import secret from '../../../../secret';
-import User from '../models/users-model-v01';
+import User from '../models/user-model-v01';
 import {
   generateHash,
   isValidateHash

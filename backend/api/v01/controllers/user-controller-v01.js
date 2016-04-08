@@ -4,7 +4,7 @@
 
 'use strict';
 
-import User from '../models/users-model-v01';
+import User from '../models/user-model-v01';
 
 
 const userClened = (user) => {
