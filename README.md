@@ -67,5 +67,9 @@ Run test `npm tests`
 Watch tests `npm run tests:watch`  
 Run tests with spec `npm run test:spec`  
 
+## Todo
+- Write tests
+
+
 ## License
 MIT
