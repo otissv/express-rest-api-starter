@@ -9,16 +9,21 @@ import secret from '../../secret';
 import { instance } from '../databases/redis';
 
 const redis = instance;
+const TOKEN = 'token';
 
+function userTokenKey (_id) {
+  return `users:${_id.toString()}`;
+}
 
 export function generateToken (user) {
 
 	// Generate json web token
   const token = jwt.sign(user, secret);
 
+
   // Save to token
   if (user._id) {
-    redis().hset('tokens', `user:${user._id.toString()}`, token);
+    redis().hset(userTokenKey(user._id), TOKEN, token);
   }
   return token;
 };
@@ -30,7 +35,7 @@ export function	getToken (_id, cb) {
   if (!_id) {
     cb && cb();
   } else {
-    redis().hget('tokens', `user:${_id.toString()}`, (err, token) => {
+    redis().hget(userTokenKey(_id), TOKEN, (err, token) => {
       if (err) {
         cb && cb(err);
       } else {
