@@ -18,7 +18,7 @@ export function generateToken (user) {
 
   // Save to token
   if (user._id) {
-    redis().hset('tokens', user._id.toString(), token);
+    redis().hset('tokens', `user:${user._id.toString()}`, token);
   }
   return token;
 };
@@ -30,7 +30,7 @@ export function	getToken (_id, cb) {
   if (!_id) {
     cb && cb();
   } else {
-    redis().hget('tokens', _id.toString(), (err, token) => {
+    redis().hget('tokens', `user:${_id.toString()}`, (err, token) => {
       if (err) {
         cb && cb(err);
       } else {
@@ -62,7 +62,7 @@ export function deleteToken (_id, cb) {
     cb && cb(true);
   } else {
 
-    redis().del('tokens', _id.toString(), (err, reply) => {
+    redis().del('tokens', `user:${_id.toString()}`, (err, reply) => {
       if (err) {
         cb && cb(err);
       }
