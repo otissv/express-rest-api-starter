@@ -10,6 +10,9 @@ export default {
   port   : all.port,
   baseURL: 'http://www.yourwebsite.com',
   title  : all.title,
+  cors   : {
+    whitelist: ['https://alloweddomain.com']
+  },
   mongodb     : {
     uri  : 'path/to/database/location',
     opts: {
@@ -20,4 +23,3 @@ export default {
   },
   session: all.session
 };
-

@@ -11,6 +11,9 @@ export default {
   port   : all.port,
   baseURL: 'http://localhost:' + all.port,
   title  : all.title + ' Dev',
+  cors   : {
+    whitelist: ['http://localhost:9000']
+  },
   mongodb: {
     uri: 'mongodb://127.0.0.1:27017/test',
     opts: {

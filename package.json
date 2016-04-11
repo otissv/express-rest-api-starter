@@ -33,7 +33,7 @@
     "compression": "~1.6.1",
     "connect-mongo": "~1.1.0",
     "cookie-parser": "~1.4.1",
-    "cors": "^2.7.1",
+    "cors": "~2.7.1",
     "csurf": "~1.8.3",
     "express": "~4.13.4",
     "express-enforces-ssl": "~1.1.0",
@@ -44,7 +44,7 @@
     "method-override": "~2.3.5",
     "mongoose": "~4.4.11",
     "nodemon": "~1.9.1",
-    "redis": "^2.6.0-1"
+    "redis": "~2.6.0-1"
   },
   "devDependencies": {
     "babel-eslint": "~6.0.2",

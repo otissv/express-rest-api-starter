@@ -13,7 +13,7 @@ export default function security (app) {
   app.disable('x-powered-by');
 
   // CORS
-  var whitelist = ['http://localhost:9000'];
+  const whitelist = app.locals.cors.whitelist;
   const corsOptions = {
     origin: function (origin, callback) {
       var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
