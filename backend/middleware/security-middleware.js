@@ -4,21 +4,28 @@
 
 'use strict';
 
-import csrf from 'csurf';
 import helmet from 'helmet';
+import cors from 'cors';
 
 
 export default function security (app) {
 
   app.disable('x-powered-by');
-  app.use(csrf());
 
-  app.use((req, res, next) => {
-    const token = req.csrfToken();
+  // CORS
+  var whitelist = ['http://localhost:9000'];
+  const corsOptions = {
+    origin: function (origin, callback) {
+      var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+      callback(null, originIsWhitelisted);
+    }
+  };
 
-    res.cookie('XSRF-TOKEN', token);
-    next();
-  });
+  app.use(cors(corsOptions));
+
+  // pre-flight
+  app.options('*', cors(corsOptions));
+
 
   // Content Security Policy
   if (app.get('env' !== 'development')) {
@@ -46,5 +53,3 @@ export default function security (app) {
   app.use(helmet.ieNoOpen());
   // app.use(require('express-enforces-ssl'));
 };
-
-export default security ;
